@@ -4,8 +4,9 @@ import PropTypes from 'prop-types'
         return (
  props.alert &&
     <>
-     <div  id ={props.id}className={`msgbox ${props.alert.type}`}>
-    <b className='continerC'><strong>{props.alert.type}</strong>{props.alert.message}</b>
+     <div  id ={props.id}className={` ContainerC  msgbox ${props.alert.type}`}>
+    <b ><strong>{props.alert.type=="warn"||props.alert.type=="info"||props.alert.type=="alert"&&props.alert.type!=="succes"} </strong></b>
+    <b >{props.alert.message}</b>
 </div>
     </>
   )

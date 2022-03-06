@@ -1,16 +1,9 @@
 import logo from "./logo.jpeg";
 import Navbar from "./components/Navbar";
 import TextBox from "./components/TextBox";
-import About from "./components/About";
 import "./App.css";
 import React, { useState } from "react";
 import Alert from "./components/Alert";
-import{
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Link
-} from "react-router-dom";
 // let function1 = (a,b) => {
 
 //   let as = prompt("enter your name");
@@ -29,42 +22,40 @@ function App() {
     )
     setTimeout(() => {
       showAlert(null)
-    }, 3500);
+    }, 5500);
   }
-  let toggleTheme =()=>{
-    if (myStyle.color==='white'){
-      setStyle({color:'black',
-      backgroundColor:'white'
-      ,borderColor:'white'}
-      )
-      showAlert("Dark Mode disabled","succes")
-      document.body.style.backgroundColor='rgb(200,250,200)'
-      setThemeBtn("Enable")}
-      else{
-        setStyle({color:'white',
+  let toggleTheme =(color,d)=>{
+    if (d){ 
+    setStyle({
+        color:'white',
         backgroundColor:'black'
-        ,borderColor:'black'}
-        )
-        showAlert("Dark Mode enabled","succes")
-        document.body.style.backgroundColor='grey'
-        setThemeBtn("Disable")}
+     })
+    document.body.style.backgroundColor =color
+    document.body.style.color ='white'
+    // document.getElementsByClassName("colorChanger").style.color ='black'
+    // document.getElementById("myTopnav").style.backgroundColor =color
+    
+  }
+  else{
+    // document.getElementsByClassName("colorChanger").style.color ='white'
+    // document.getElementById("myTopnav").style.backgroundColor =color
+    setStyle({
+      color:"black",
+      backgroundColor:"white"
+    })
+    document.body.style.backgroundColor =color
+    document.body.style.color ='black'
+  }
         
       }
       // let style =myStyle
   return (
     <>
-    <Router>
-      <Navbar logo={logo} style={myStyle} bgclr={myStyle.backgroundColor} mode={themeBtn} btnFunc={toggleTheme} />
+      <Navbar logo={logo} style={myStyle} bgclr={myStyle.backgroundColor} mode={themeBtn} btnFunc={toggleTheme} bgColor="green" />
       <Alert id ="idk" alert={alert} ></Alert>
-      <Routes>
-        <Route exact path="/" element={<TextBox showalert={showAlert} heading="THIS IS MY FORM " />}>
-      </Route>
-      <Route exact path="/about" element={<About/>}>
-      </Route>
-      </Routes>
+        <TextBox showalert={showAlert} heading="Enter Text " />
+        
       
-      {/* <button type="button" onClick={toggleTheme} className="button-s">Change to {themeBtn}</button> */}
-      </Router>
     </>
   );
 }
